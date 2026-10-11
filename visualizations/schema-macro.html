@@ -1,0 +1,202 @@
+<div id="central-schema-viz">
+  <style>
+    #central-schema-viz { color: var(--foreground); background: transparent; width: 100%; }
+    #central-schema-viz .intro { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; margin-bottom:12px; flex-wrap:wrap; }
+    #central-schema-viz .intro p { margin:4px 0 0; color:var(--muted-foreground); }
+    #central-schema-viz .legend { display:flex; gap:12px; flex-wrap:wrap; color:var(--muted-foreground); }
+    #central-schema-viz .legend span { display:inline-flex; gap:6px; align-items:center; }
+    #central-schema-viz .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+    #central-schema-viz .dot.identity { background:var(--viz-series-2); }
+    #central-schema-viz .dot.catalog { background:var(--viz-series-3); }
+    #central-schema-viz .dot.core { background:var(--viz-series-1); }
+    #central-schema-viz .dot.operation { background:var(--viz-series-4); }
+    #central-schema-viz .diagram { width:100%; min-height:720px; display:block; }
+    #central-schema-viz .zone { fill:var(--muted); fill-opacity:.22; stroke:var(--border); stroke-width:1; }
+    #central-schema-viz .zone-label { fill:var(--muted-foreground); font-size:12px; font-weight:500; letter-spacing:.04em; }
+    #central-schema-viz .node rect { stroke-width:1; rx:9; }
+    #central-schema-viz .node text { fill:var(--foreground); font-size:12px; }
+    #central-schema-viz .node .name { font-weight:500; }
+    #central-schema-viz .node .detail { fill:var(--muted-foreground); font-size:11px; }
+    #central-schema-viz .identity rect { fill:var(--viz-series-2); fill-opacity:.14; stroke:var(--viz-series-2); }
+    #central-schema-viz .catalog rect { fill:var(--viz-series-3); fill-opacity:.14; stroke:var(--viz-series-3); }
+    #central-schema-viz .core rect { fill:var(--viz-series-1); fill-opacity:.16; stroke:var(--viz-series-1); }
+    #central-schema-viz .operation rect { fill:var(--viz-series-4); fill-opacity:.14; stroke:var(--viz-series-4); }
+    #central-schema-viz .audit rect { fill:var(--viz-series-5); fill-opacity:.14; stroke:var(--viz-series-5); }
+    #central-schema-viz .edge { fill:none; stroke:var(--muted-foreground); stroke-opacity:.65; stroke-width:1.4; marker-end:url(#arrow); }
+    #central-schema-viz .edge.strong { stroke:var(--foreground); stroke-opacity:.72; stroke-width:1.8; }
+    #central-schema-viz .edge.audit-edge { stroke:var(--viz-series-5); stroke-opacity:.75; stroke-dasharray:5 4; }
+    #central-schema-viz .edge-label { fill:var(--muted-foreground); font-size:10px; }
+    #central-schema-viz .access-title { margin:18px 0 8px; }
+    #central-schema-viz .access-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    #central-schema-viz .access { min-width:0; }
+    #central-schema-viz .access h3 { margin:0 0 6px; }
+    #central-schema-viz .access p { margin:0; color:var(--muted-foreground); }
+    #central-schema-viz .rule { margin-top:12px; display:flex; gap:8px; align-items:flex-start; color:var(--muted-foreground); }
+    #central-schema-viz .rule strong { color:var(--foreground); font-weight:500; }
+    @media (max-width:700px) {
+      #central-schema-viz .access-grid { grid-template-columns:1fr 1fr; }
+      #central-schema-viz .diagram { min-height:520px; }
+    }
+    @media (max-width:420px) {
+      #central-schema-viz .access-grid { grid-template-columns:1fr; }
+    }
+  </style>
+
+  <div class="intro">
+    <div>
+      <h2>Schema macro da Central Comercial</h2>
+      <p>Uma instalação interna da Skave · um único registro por oportunidade · histórico preservado</p>
+    </div>
+    <div class="legend text-small" aria-label="Legenda de domínios">
+      <span><i class="dot identity"></i>Identidade</span>
+      <span><i class="dot catalog"></i>Configuração</span>
+      <span><i class="dot core"></i>Núcleo comercial</span>
+      <span><i class="dot operation"></i>Operação</span>
+    </div>
+  </div>
+
+  <svg class="diagram" viewBox="0 0 1160 720" role="img" aria-labelledby="schema-title schema-desc" preserveAspectRatio="xMidYMid meet">
+    <title id="schema-title">Relacionamentos principais do banco da Central Comercial</title>
+    <desc id="schema-desc">Oportunidades conectam empresas, contatos, produtos, funis, tarefas e histórico. Perfis controlam o acesso por cargo e aprovação.</desc>
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--muted-foreground)"></path>
+      </marker>
+    </defs>
+
+    <rect class="zone" x="8" y="24" width="238" height="674" rx="14"></rect>
+    <text class="zone-label" x="24" y="48">IDENTIDADE E CADASTROS</text>
+    <rect class="zone" x="258" y="24" width="638" height="674" rx="14"></rect>
+    <text class="zone-label" x="274" y="48">NÚCLEO COMERCIAL E HISTÓRICO</text>
+    <rect class="zone" x="908" y="24" width="244" height="674" rx="14"></rect>
+    <text class="zone-label" x="924" y="48">CONFIGURAÇÃO E OPERAÇÃO</text>
+
+    <g class="node identity" transform="translate(26 72)">
+      <rect width="196" height="52"></rect><text class="name" x="14" y="22">auth.users</text><text class="detail" x="14" y="40">login e sessão</text>
+    </g>
+    <g class="node identity" transform="translate(26 146)">
+      <rect width="196" height="66"></rect><text class="name" x="14" y="22">profiles</text><text class="detail" x="14" y="40">cargo + aprovação</text><text class="detail" x="14" y="56">ativo · pendente · bloqueado</text>
+    </g>
+    <g class="node core" transform="translate(26 276)">
+      <rect width="196" height="62"></rect><text class="name" x="14" y="22">companies</text><text class="detail" x="14" y="40">empresa + segmento</text><text class="detail" x="14" y="55">CNPJ único normalizado</text>
+    </g>
+    <g class="node core" transform="translate(26 374)">
+      <rect width="196" height="62"></rect><text class="name" x="14" y="22">contacts</text><text class="detail" x="14" y="40">pessoa + origem</text><text class="detail" x="14" y="55">ativa ou desativada</text>
+    </g>
+    <g class="node core" transform="translate(42 472)">
+      <rect width="164" height="54"></rect><text class="name" x="14" y="22">company_contacts</text><text class="detail" x="14" y="41">N:N + cargo/função</text>
+    </g>
+    <g class="node operation" transform="translate(26 574)">
+      <rect width="196" height="74"></rect><text class="name" x="14" y="22">Notas e anexos</text><text class="detail" x="14" y="40">empresa · contato</text><text class="detail" x="14" y="56">arquivos privados</text>
+    </g>
+
+    <g class="node catalog" transform="translate(278 72)">
+      <rect width="180" height="62"></rect><text class="name" x="14" y="22">pipelines</text><text class="detail" x="14" y="40">Pré-venda · Venda</text><text class="detail" x="14" y="55">Pós-venda</text>
+    </g>
+    <g class="node catalog" transform="translate(492 72)">
+      <rect width="180" height="62"></rect><text class="name" x="14" y="22">pipeline_stages</text><text class="detail" x="14" y="40">etapas fixas e ordenadas</text><text class="detail" x="14" y="55">ocultação individual</text>
+    </g>
+    <g class="node core" transform="translate(404 206)">
+      <rect width="320" height="92"></rect><text class="name" x="16" y="24">opportunities</text><text class="detail" x="16" y="45">empresa · contato · responsável</text><text class="detail" x="16" y="62">funil e etapa atual · valor · temperatura</text><text class="detail" x="16" y="79">active · won · lost · disqualified · archived</text>
+    </g>
+    <g class="node core" transform="translate(278 354)">
+      <rect width="186" height="70"></rect><text class="name" x="14" y="22">opportunity_products</text><text class="detail" x="14" y="40">quantidade + preço</text><text class="detail" x="14" y="56">nome/categoria preservados</text>
+    </g>
+    <g class="node core" transform="translate(490 354)">
+      <rect width="176" height="70"></rect><text class="name" x="14" y="22">qualification</text><text class="detail" x="14" y="40">respostas booleanas</text><text class="detail" x="14" y="56">validações históricas</text>
+    </g>
+    <g class="node audit" transform="translate(692 354)">
+      <rect width="180" height="70"></rect><text class="name" x="14" y="22">stage_entries</text><text class="detail" x="14" y="40">passagens imutáveis</text><text class="detail" x="14" y="56">base da Dashboard</text>
+    </g>
+    <g class="node audit" transform="translate(278 486)">
+      <rect width="186" height="70"></rect><text class="name" x="14" y="22">opportunity_outcomes</text><text class="detail" x="14" y="40">ganho · perda · arquivo</text><text class="detail" x="14" y="56">somente 1 vigente</text>
+    </g>
+    <g class="node operation" transform="translate(490 486)">
+      <rect width="176" height="70"></rect><text class="name" x="14" y="22">post_sale_cycles</text><text class="detail" x="14" y="40">ativo · finalizado</text><text class="detail" x="14" y="56">interrompido</text>
+    </g>
+    <g class="node operation" transform="translate(692 486)">
+      <rect width="180" height="70"></rect><text class="name" x="14" y="22">tasks</text><text class="detail" x="14" y="40">manual ou automática</text><text class="detail" x="14" y="56">pendente · concluída · cancelada</text>
+    </g>
+    <g class="node operation" transform="translate(278 612)">
+      <rect width="186" height="58"></rect><text class="name" x="14" y="22">contact_interactions</text><text class="detail" x="14" y="41">canal + data real</text>
+    </g>
+    <g class="node operation" transform="translate(490 612)">
+      <rect width="176" height="58"></rect><text class="name" x="14" y="22">Notas e anexos</text><text class="detail" x="14" y="41">da oportunidade</text>
+    </g>
+    <g class="node audit" transform="translate(692 612)">
+      <rect width="180" height="58"></rect><text class="name" x="14" y="22">activity_events</text><text class="detail" x="14" y="41">timeline imutável</text>
+    </g>
+
+    <g class="node catalog" transform="translate(928 72)">
+      <rect width="204" height="86"></rect><text class="name" x="14" y="22">Catálogos</text><text class="detail" x="14" y="40">segmentos · origens</text><text class="detail" x="14" y="56">motivos · categorias</text><text class="detail" x="14" y="72">parâmetros de qualificação</text>
+    </g>
+    <g class="node catalog" transform="translate(928 206)">
+      <rect width="204" height="66"></rect><text class="name" x="14" y="22">products</text><text class="detail" x="14" y="40">categoria + valor base</text><text class="detail" x="14" y="56">somente Admin altera</text>
+    </g>
+    <g class="node catalog" transform="translate(928 316)">
+      <rect width="204" height="58"></rect><text class="name" x="14" y="22">sales_goal_changes</text><text class="detail" x="14" y="41">meta vigente e histórico</text>
+    </g>
+    <g class="node operation" transform="translate(928 438)">
+      <rect width="204" height="74"></rect><text class="name" x="14" y="22">business_operations</text><text class="detail" x="14" y="40">chave de idempotência</text><text class="detail" x="14" y="56">impede confirmação duplicada</text>
+    </g>
+    <g class="node identity" transform="translate(928 574)">
+      <rect width="204" height="74"></rect><text class="name" x="14" y="22">RLS + funções transacionais</text><text class="detail" x="14" y="40">autorizam cada usuário</text><text class="detail" x="14" y="56">todos os efeitos ou nenhum</text>
+    </g>
+
+    <path class="edge strong" d="M124 124 L124 146"></path>
+    <path class="edge" d="M222 179 C300 179 320 235 404 245"></path>
+    <path class="edge" d="M222 307 C300 307 330 262 404 258"></path>
+    <path class="edge" d="M222 405 C310 405 324 282 404 274"></path>
+    <path class="edge" d="M124 338 L124 374"></path>
+    <path class="edge" d="M124 436 L124 472"></path>
+    <path class="edge strong" d="M458 103 L492 103"></path>
+    <path class="edge strong" d="M582 134 L582 206"></path>
+    <path class="edge" d="M564 298 L386 354"></path>
+    <path class="edge" d="M564 298 L578 354"></path>
+    <path class="edge audit-edge" d="M650 298 L768 354"></path>
+    <path class="edge audit-edge" d="M500 298 L390 486"></path>
+    <path class="edge strong" d="M464 521 L490 521"></path>
+    <path class="edge" d="M666 521 L692 521"></path>
+    <path class="edge" d="M456 298 C420 430 375 520 371 612"></path>
+    <path class="edge" d="M532 298 L568 612"></path>
+    <path class="edge audit-edge" d="M678 298 C820 330 820 560 782 612"></path>
+    <path class="edge" d="M928 230 C840 230 600 360 464 383"></path>
+    <path class="edge" d="M928 114 C840 114 820 190 724 231"></path>
+    <path class="edge" d="M928 114 C780 114 700 360 666 383"></path>
+    <path class="edge" d="M928 475 C850 475 850 290 724 266"></path>
+    <path class="edge strong" d="M1030 574 L1030 512"></path>
+
+    <text class="edge-label" x="136" y="138">1:1</text>
+    <text class="edge-label" x="132" y="457">N:N</text>
+    <text class="edge-label" x="470" y="95">1:N</text>
+    <text class="edge-label" x="470" y="343">1:N</text>
+    <text class="edge-label" x="700" y="343">registra</text>
+    <text class="edge-label" x="471" y="512">ganho inicia</text>
+    <text class="edge-label" x="731" y="600">audita</text>
+  </svg>
+
+  <h2 class="access-title">Regras de acesso por usuário</h2>
+  <div class="access-grid">
+    <section class="card access">
+      <h3>Administrador</h3>
+      <p>Acessa todos os funis e registros; aprova usuários; gerencia produtos, catálogos, metas e todas as tarefas; reabre qualquer resultado.</p>
+    </section>
+    <section class="card access">
+      <h3>Pré-venda</h3>
+      <p>Opera Pré-venda e Venda; gerencia empresas e contatos; consulta produtos; altera tarefas quando é criador ou responsável.</p>
+    </section>
+    <section class="card access">
+      <h3>Comercial</h3>
+      <p>Opera Pré-venda, Venda e Pós-venda; gerencia empresas e contatos; consulta produtos; altera tarefas quando é criador ou responsável.</p>
+    </section>
+    <section class="card access">
+      <h3>Sem aprovação</h3>
+      <p>Pendente, recusado ou desativado não acessa dados comerciais. Enxerga apenas a própria situação de acesso.</p>
+    </section>
+  </div>
+
+  <div class="rule text-small">
+    <strong>Regra central:</strong>
+    <span>RLS valida o usuário em todas as tabelas. Ganhar, perder, transferir, restaurar e finalizar Pós-venda são transações: todos os efeitos são gravados juntos ou nenhum é.</span>
+  </div>
+</div>

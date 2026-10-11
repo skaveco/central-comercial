@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-code);
+  --font-heading: var(--font-ui);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+  --font-ui: Inter, Arial, Helvetica, sans-serif;
+  --font-code: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --fixed-light: #fcfcfc;
+  --fixed-dark: #111111;
+
+  /* Primitivos: 1–2 fundo, 3–5 interação, 6–8 borda, 9–10 sólido, 11–12 texto. */
+  --primary-1: #fdfdfb; --primary-2: #fafdea; --primary-3: #f3fbc6; --primary-4: #ebf6a3; --primary-5: #e2ef82; --primary-6: #d6e27e; --primary-7: #c4d06e; --primary-8: #afba44; --primary-9: #cedc34; --primary-10: #c4d137; --primary-11: #768000; --primary-12: #3a3e1f;
+  --gray-1: #fcfcfc; --gray-2: #f9f9f9; --gray-3: #f0f0f0; --gray-4: #e8e8e8; --gray-5: #e0e0e0; --gray-6: #d9d9d9; --gray-7: #cecece; --gray-8: #bbbbbb; --gray-9: #8d8d8d; --gray-10: #838383; --gray-11: #646464; --gray-12: #202020;
+  --amber-1: #fefdfb; --amber-2: #fefbe9; --amber-3: #fff7c2; --amber-4: #ffee9c; --amber-5: #fbe577; --amber-6: #f3d673; --amber-7: #e9c162; --amber-8: #e2a336; --amber-9: #ffc53d; --amber-10: #ffba18; --amber-11: #ab6400; --amber-12: #4f3422;
+  --tomato-1: #fffcfc; --tomato-2: #fff8f7; --tomato-3: #feebe7; --tomato-4: #ffdcd3; --tomato-5: #ffcdc2; --tomato-6: #fdbdaf; --tomato-7: #f5a898; --tomato-8: #ec8e7b; --tomato-9: #e54d2e; --tomato-10: #dd4425; --tomato-11: #d13415; --tomato-12: #5c271f;
+  --ruby-1: #fffcfd; --ruby-2: #fff7f8; --ruby-3: #feeaed; --ruby-4: #ffdce1; --ruby-5: #ffced6; --ruby-6: #f8bfc8; --ruby-7: #efacb8; --ruby-8: #e592a3; --ruby-9: #e54666; --ruby-10: #dc3b5d; --ruby-11: #ca244d; --ruby-12: #64172b;
+  --crimson-1: #fffcfd; --crimson-2: #fef7f9; --crimson-3: #ffe9f0; --crimson-4: #fedce7; --crimson-5: #facedd; --crimson-6: #f3bed1; --crimson-7: #eaacc3; --crimson-8: #e093b2; --crimson-9: #e93d82; --crimson-10: #df3478; --crimson-11: #cb1d63; --crimson-12: #621639;
+  --plum-1: #fefcff; --plum-2: #fdf7fd; --plum-3: #fbebfb; --plum-4: #f7def8; --plum-5: #f2d1f3; --plum-6: #e9c2ec; --plum-7: #deade3; --plum-8: #cf91d8; --plum-9: #ab4aba; --plum-10: #a144af; --plum-11: #953ea3; --plum-12: #53195d;
+  --indigo-1: #fdfdfe; --indigo-2: #f7f9ff; --indigo-3: #edf2fe; --indigo-4: #e1e9ff; --indigo-5: #d2deff; --indigo-6: #c1d0ff; --indigo-7: #abbdf9; --indigo-8: #8da4ef; --indigo-9: #3e63dd; --indigo-10: #3358d4; --indigo-11: #3a5bc7; --indigo-12: #1f2d5c;
+  --grass-1: #fbfefb; --grass-2: #f5fbf5; --grass-3: #e9f6e9; --grass-4: #daf1db; --grass-5: #c9e8ca; --grass-6: #b2ddb5; --grass-7: #94ce9a; --grass-8: #65ba74; --grass-9: #46a758; --grass-10: #3e9b4f; --grass-11: #2a7e3b; --grass-12: #203c25;
+
+  --radius: 0.625rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --fixed-light: #fcfcfc;
+  --fixed-dark: #111111;
+
+  --primary-1: #111207; --primary-2: #181909; --primary-3: #262805; --primary-4: #323500; --primary-5: #3f4100; --primary-6: #4c4f00; --primary-7: #5b5f00; --primary-8: #6d7100; --primary-9: #ebf38f; --primary-10: #e2e986; --primary-11: #d6de68; --primary-12: #eef692;
+  --gray-1: #111111; --gray-2: #191919; --gray-3: #222222; --gray-4: #2a2a2a; --gray-5: #313131; --gray-6: #3a3a3a; --gray-7: #484848; --gray-8: #606060; --gray-9: #6e6e6e; --gray-10: #7b7b7b; --gray-11: #b3b3b3; --gray-12: #eeeeee;
+  --amber-1: #16120c; --amber-2: #1d180f; --amber-3: #302008; --amber-4: #3f2700; --amber-5: #4d3000; --amber-6: #5c3d05; --amber-7: #714f19; --amber-8: #8f6424; --amber-9: #ffc53d; --amber-10: #ffd60a; --amber-11: #ffca16; --amber-12: #ffe7b3;
+  --tomato-1: #181111; --tomato-2: #1f1513; --tomato-3: #391714; --tomato-4: #4e1511; --tomato-5: #5e1c16; --tomato-6: #6e2920; --tomato-7: #853a2d; --tomato-8: #ac4d39; --tomato-9: #e54d2e; --tomato-10: #ec6142; --tomato-11: #ff977d; --tomato-12: #fbd3cb;
+  --ruby-1: #191113; --ruby-2: #1e1517; --ruby-3: #3a141e; --ruby-4: #4e1325; --ruby-5: #5e1a2e; --ruby-6: #6f2539; --ruby-7: #883447; --ruby-8: #b3445a; --ruby-9: #e54666; --ruby-10: #ec5a72; --ruby-11: #ff949d; --ruby-12: #fed2e1;
+  --crimson-1: #191114; --crimson-2: #201318; --crimson-3: #381525; --crimson-4: #4d122f; --crimson-5: #5c1839; --crimson-6: #6d2545; --crimson-7: #873356; --crimson-8: #b0436e; --crimson-9: #e93d82; --crimson-10: #ee518a; --crimson-11: #ff92ad; --crimson-12: #fdd3e8;
+  --plum-1: #181118; --plum-2: #201320; --plum-3: #351a35; --plum-4: #451d47; --plum-5: #512454; --plum-6: #5e3061; --plum-7: #734079; --plum-8: #92549c; --plum-9: #ab4aba; --plum-10: #b658c4; --plum-11: #e796f3; --plum-12: #f4d4f4;
+  --indigo-1: #11131f; --indigo-2: #141726; --indigo-3: #182449; --indigo-4: #1d2e62; --indigo-5: #253974; --indigo-6: #304384; --indigo-7: #3a4f97; --indigo-8: #435db1; --indigo-9: #3e63dd; --indigo-10: #5472e4; --indigo-11: #9eb1ff; --indigo-12: #d6e1ff;
+  --grass-1: #0e1511; --grass-2: #141a15; --grass-3: #1b2a1e; --grass-4: #1d3a24; --grass-5: #25482d; --grass-6: #2d5736; --grass-7: #366740; --grass-8: #3e7949; --grass-9: #46a758; --grass-10: #53b365; --grass-11: #71d083; --grass-12: #c2f0c2;
+
+}
+
+@layer base {
+  * {
+    border-color: var(--gray-6);
+    outline-color: var(--primary-8);
+  }
+  body {
+    background: var(--gray-1);
+    color: var(--gray-12);
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  /* Tipografia: usar, por exemplo, className="base__medium". */
+  .sm__normal, .sm__medium, .sm__semibold, .sm__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .base__normal, .base__medium, .base__semibold, .base__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .lg__normal, .lg__medium, .lg__semibold, .lg__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .xl__normal, .xl__medium, .xl__semibold, .xl__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .\32 xl__normal, .\32 xl__medium, .\32 xl__semibold, .\32 xl__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .\33 xl__normal, .\33 xl__medium, .\33 xl__semibold, .\33 xl__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .\34 xl__normal, .\34 xl__medium, .\34 xl__semibold, .\34 xl__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    line-height: 48px;
+  }
+
+  .\35 xl__normal, .\35 xl__medium, .\35 xl__semibold, .\35 xl__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 48px;
+    line-height: 48px;
+  }
+
+  .\36 xl__normal, .\36 xl__medium, .\36 xl__semibold, .\36 xl__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    line-height: 60px;
+  }
+
+  .\37 xl__normal, .\37 xl__medium, .\37 xl__semibold, .\37 xl__bold {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 72px;
+    line-height: 72px;
+  }
+
+  .sm__normal, .base__normal, .lg__normal, .xl__normal,
+  .\32 xl__normal, .\33 xl__normal, .\34 xl__normal, .\35 xl__normal,
+  .\36 xl__normal, .\37 xl__normal { font-weight: 400; }
+
+  .sm__medium, .base__medium, .lg__medium, .xl__medium,
+  .\32 xl__medium, .\33 xl__medium, .\34 xl__medium, .\35 xl__medium,
+  .\36 xl__medium, .\37 xl__medium { font-weight: 500; }
+
+  .sm__semibold, .base__semibold, .lg__semibold, .xl__semibold,
+  .\32 xl__semibold, .\33 xl__semibold, .\34 xl__semibold, .\35 xl__semibold,
+  .\36 xl__semibold, .\37 xl__semibold { font-weight: 600; }
+
+  .sm__bold, .base__bold, .lg__bold, .xl__bold,
+  .\32 xl__bold, .\33 xl__bold, .\34 xl__bold, .\35 xl__bold,
+  .\36 xl__bold, .\37 xl__bold { font-weight: 700; }
+}

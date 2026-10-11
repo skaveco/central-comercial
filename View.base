@@ -1,0 +1,8 @@
+views:
+  - type: table
+    name: Visualizaçao padrão
+  - type: kanban
+    name: Visualizaçao padrão 2
+    groupBy:
+      property: file.folder
+      direction: ASC
