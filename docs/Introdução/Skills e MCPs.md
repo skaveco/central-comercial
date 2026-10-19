@@ -1,6 +1,6 @@
 # Skills e MCPs
 
-Esta página descreve diretrizes e procedimentos de apoio ao desenvolvimento. A lista não comprova instalação de skills ou conexão de MCPs. Regras de produto estão em [Funcionalidades](../Funcionalidades/Funcionalidades.md) e [Configurações](../Configurações/Configurações.md); fluxo de trabalho em [AGENTS.md](../AGENTS.md) e tecnologias em [Stack e arquitetura](Stack%20e%20arquitetura.md).
+Esta página descreve diretrizes e procedimentos de apoio ao desenvolvimento. A lista não comprova instalação de skills ou conexão de MCPs. Regras de produto estão em [Funcionalidades](../Funcionalidades/Funcionalidades.md) e [Configurações](../Configurações/Configurações.md); fluxo de trabalho em [AGENTS.md](../../AGENTS.md) e tecnologias em [Stack e arquitetura](Stack%20e%20arquitetura.md).
 
 ## Diretrizes de IA para Desenvolvimento
 ## Rules

@@ -74,7 +74,7 @@ const sections: SidebarSection[] = [
         icon: "/icons/sidebar/contacts.svg",
       },
       {
-        label: "Produtos e Serviços",
+        label: "Produtos",
         href: "/cadastros/produtos",
         icon: "/icons/sidebar/products.svg",
       },
@@ -264,11 +264,15 @@ export function AppSidebar({ collapsed = false, user }: AppSidebarProps) {
                 side={collapsed ? "right" : "top"}
                 sideOffset={8}
               >
-                <DropdownMenuItem render={<Link href="/configuracoes" />}>
-                  <Cog6ToothIcon aria-hidden="true" />
-                  Configurações
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                {user.role === "admin" ? (
+                  <>
+                    <DropdownMenuItem render={<Link href="/configuracoes" />}>
+                      <Cog6ToothIcon aria-hidden="true" />
+                      Configurações
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                ) : null}
                 <DropdownMenuItem
                   onClick={() => {
                     setLogoutError(null);

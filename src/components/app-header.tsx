@@ -46,6 +46,8 @@ function labelForSegment(segment: string) {
   return routeLabels[segment] ?? segment.replaceAll("-", " ");
 }
 
+const uuidSegmentPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 export function AppHeader({ sidebarCollapsed, onToggleSidebar }: AppHeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -53,7 +55,7 @@ export function AppHeader({ sidebarCollapsed, onToggleSidebar }: AppHeaderProps)
   const [darkMode, setDarkMode] = useState(false);
 
   const breadcrumbs = useMemo(() => {
-    const segments = pathname.split("/").filter(Boolean);
+    const segments = pathname.split("/").filter((segment) => segment && !uuidSegmentPattern.test(segment));
     return segments.length > 0 ? segments.map(labelForSegment) : ["Dashboard"];
   }, [pathname]);
 
@@ -94,7 +96,7 @@ export function AppHeader({ sidebarCollapsed, onToggleSidebar }: AppHeaderProps)
 
   return (
     <>
-      <header className="w-full pt-2 pr-2">
+      <header className="w-full shrink-0 pt-2 pr-2">
         <div className="flex w-full items-center justify-between rounded-[10px] bg-[var(--gray-1)] px-5 py-4">
           <div className="flex min-w-0 items-center gap-2">
             <button

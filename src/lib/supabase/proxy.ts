@@ -6,6 +6,7 @@ import { getSupabaseConfig, hasSupabaseConfig } from "@/lib/supabase/config";
 
 const publicPaths = new Set([
   "/login",
+  "/cadastro",
   "/recuperar-senha",
   "/redefinir-senha",
   "/auth/confirm",
@@ -112,7 +113,7 @@ export async function updateSession(request: NextRequest) {
     );
   }
 
-  if (pathname === "/login" || pathname === "/recuperar-senha") {
+  if (pathname === "/login" || pathname === "/cadastro" || pathname === "/recuperar-senha") {
     const destination = getSafeInternalPath(request.nextUrl.searchParams.get("next"));
     return redirectWithSessionCookies(request, supabaseResponse, destination);
   }

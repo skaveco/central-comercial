@@ -17,6 +17,26 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@keyframes opportunity-confetti-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) rotate(0deg);
+  }
+  12% { opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: translateY(116px) rotate(420deg);
+  }
+}
+
+.opportunity-confetti {
+  animation: opportunity-confetti-fall 1.7s ease-in infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opportunity-confetti { animation: none; opacity: 0; }
+}
+
 :root {
   color-scheme: light;
   --font-ui: Inter, Arial, Helvetica, sans-serif;

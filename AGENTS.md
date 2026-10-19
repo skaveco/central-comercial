@@ -17,9 +17,9 @@ The AI must prioritize **clarity, safety, maintainability and traceability over 
 # 1\. SOURCE OF TRUTH
 
 ## 1.1 Product rules
-The [PRD](Introdução/PRD.md) defines the product scope and summarizes the approved rules. [Functional specifications](Funcionalidades/Funcionalidades.md) and [Settings](Configurações/Configurações.md) contain the authoritative operational details, including validations, permissions, automations and metric formulas. Read the relevant module before implementation; do not infer missing rules from the PRD summary.
+The [PRD](docs/Introdução/PRD.md) defines the product scope and summarizes the approved rules. [Functional specifications](docs/Funcionalidades/Funcionalidades.md) and [Settings](docs/Configurações/Configurações.md) contain the authoritative operational details, including validations, permissions, automations and metric formulas. Read the relevant module before implementation; do not infer missing rules from the PRD summary.
 
-Explicit decisions approved by the user take precedence over older documentation or design notes. Keep the affected documents consistent. If a conflict has no recorded resolution, explain it before changing product behavior. [Overview Geral](Introdução/Overview%20Geral.md) is a navigation summary, not a separate specification.
+Explicit decisions approved by the user take precedence over older documentation or design notes. Keep the affected documents consistent. If a conflict has no recorded resolution, explain it before changing product behavior. [Overview Geral](docs/Introdução/Overview%20Geral.md) is a navigation summary, not a separate specification.
 
 The AI must not silently change:
 *   permissions;
@@ -257,7 +257,7 @@ Refactor only when:
 
 # 5\. OFFICIAL PROJECT STACK
 
-The approved stack is documented in [Stack e arquitetura](Introdução/Stack%20e%20arquitetura.md):
+The approved stack is documented in [Stack e arquitetura](docs/Introdução/Stack%20e%20arquitetura.md):
 
 *   **Next.js 16**
 *   **React 19**

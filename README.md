@@ -17,7 +17,7 @@ pnpm lint
 pnpm build
 ```
 
-O projeto usa App Router e o código da aplicação fica em `src/`. A documentação funcional está em [Introdução](Introdu%C3%A7%C3%A3o/README.md), [Funcionalidades](Funcionalidades/README.md) e [Configurações](Configura%C3%A7%C3%B5es/README.md).
+O projeto usa App Router e o código da aplicação fica em `src/`. A documentação funcional está em [Introdução](docs/Introdu%C3%A7%C3%A3o/Introdu%C3%A7%C3%A3o.md), [Funcionalidades](docs/Funcionalidades/Funcionalidades.md) e [Configurações](docs/Configura%C3%A7%C3%B5es/Configura%C3%A7%C3%B5es.md).
 
 O build usa Webpack porque o Turbopack não consegue abrir um processo interno para CSS neste ambiente. O desenvolvimento continua com `next dev`.
 

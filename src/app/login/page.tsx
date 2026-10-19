@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 
 import { AuthShell } from "@/components/auth/auth-shell";
 import { LoginForm } from "@/components/auth/login-form";
@@ -14,6 +15,14 @@ async function LoginContent({ searchParams }: LoginPageProps) {
   return (
     <AuthShell
       description="Use seu e-mail corporativo para acessar."
+      footer={
+        <>
+          Ainda não tem acesso?{" "}
+          <Link className="font-medium text-[var(--primary-11)] hover:underline" href="/cadastro">
+            Solicitar cadastro
+          </Link>
+        </>
+      }
       title="Acesse sua conta"
     >
       <LoginForm

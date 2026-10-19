@@ -15,7 +15,8 @@ Base de revisão: telas e notas de Tarefas no Figma. As regras operacionais abai
 *   Selecionar oportunidade herda apenas empresa e contato já vinculados a ela. Ausência desses vínculos não bloqueia a tarefa nem cria cadastros.
 *   Sem oportunidade, permitir empresa e/ou contato ativos. Se ambos forem informados, validar o vínculo; não escolher empresa arbitrariamente quando o contato representa várias.
 *   Trocar/remover a oportunidade exige revisar os vínculos antes de salvar. Desativação posterior de empresas/contatos preserva as relações existentes.
-*   Tarefas vinculadas também podem ser criadas, visualizadas e concluídas dentro da negociação.
+*   Tarefas vinculadas também podem ser criadas, visualizadas e concluídas dentro da negociação, da empresa e do contato relacionados. As abas **Pendentes, Concluídas e Canceladas** preservam o histórico; clicar na tarefa abre seus detalhes e o check executa a conclusão ou, quando permitido, a reabertura.
+*   Consultar uma empresa ou contato não amplia a permissão sobre tarefas: cada card mostra somente as tarefas que o usuário já pode acessar, conforme as regras deste módulo.
 
 ### Criação e restauração de oportunidades — aprovadas em 10/10/2026
 Criar uma oportunidade em qualquer etapa executa somente as automações dessa etapa, conforme [Oportunidades](Oportunidades.md), sem criar tarefas das etapas anteriores. Restaurar executa normalmente as automações da etapa escolhida, conforme [Histórico](Hist%C3%B3rico.md); tarefas canceladas do ciclo anterior permanecem canceladas. Na entrada em Primeiro contato, o vencimento da nova tarefa é o dia da criação/restauração; em Diagnóstico, solicitar data e horário da call; nas demais etapas, seguir seus prazos ou formulários. Não duplicar tarefas por repetição da mesma confirmação.

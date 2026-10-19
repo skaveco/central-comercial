@@ -4,7 +4,7 @@
 
 Este documento descreve o modelo inicial implementado pelas migrations. A instalação atende somente à operação interna da Skave. Não existe separação por organização no MVP.
 
-As regras detalhadas continuam nas especificações de `Funcionalidades/` e `Configurações/`. Este documento traduz essas regras para entidades, relações, integridade e acesso.
+As regras detalhadas continuam nas especificações de `docs/Funcionalidades/` e `docs/Configurações/`. Este documento traduz essas regras para entidades, relações, integridade e acesso.
 
 ## Princípios
 
@@ -208,10 +208,11 @@ Campos principais:
 
 - oportunidade, funil e etapa;
 - `entered_at`, `entered_by`;
+- snapshots de `responsible_id` e `source_id` no momento da entrada;
 - origem da entrada: criação, movimentação, transferência, restauração, reabertura ou automação;
 - `operation_id` para impedir duplicação da mesma confirmação.
 
-Essa tabela sustenta as métricas de passagem e primeira entrada sem deduzi-las da etapa atual.
+Essa tabela sustenta as métricas de passagem e primeira entrada sem deduzi-las da etapa atual. Registros anteriores à migration da Dashboard foram preenchidos com os valores atuais disponíveis; novas entradas preservam os valores históricos exatos.
 
 ### `opportunity_outcomes`
 
@@ -262,6 +263,8 @@ Campos principais:
 - autoria e datas.
 
 Uma restrição impede duas tarefas automáticas equivalentes para a mesma entrada de etapa. Tarefas canceladas nunca são reativadas.
+
+Na criação e na edição, o banco valida a elegibilidade do responsável, a correspondência entre oportunidade, empresa e contato e o vínculo ativo entre empresa e contato quando não há oportunidade. Vínculos históricos inativados são preservados quando a edição não os altera. Tarefas de Gestão não podem ser vinculadas a uma oportunidade.
 
 ### `contact_interactions`
 
@@ -316,8 +319,10 @@ Funções transacionais do banco são usadas para:
 - finalizar/interromper Pós-venda;
 - desativar usuário e transferir responsabilidades;
 - registrar contato e atualizar `last_contact_at`;
+- criar e editar tarefas, inclusive seus vínculos, por meio das RPCs controladas;
 - concluir a tarefa de diagnóstico e avançar quando houve contato;
 - trocar responsável e transferir tarefas automáticas pendentes.
+- calcular os indicadores da Dashboard pela RPC autenticada `get_dashboard_metrics`, sem expor consultas analíticas irrestritas.
 
 Cada função valida permissões, estado atual e chave de idempotência antes de alterar dados. Ou todos os efeitos são gravados, ou nenhum é.
 
@@ -374,7 +379,7 @@ Restrições de interface também serão repetidas nas operações transacionais
 - contatos por nome, e-mail normalizado, telefone normalizado e status;
 - produtos por nome, categoria e status;
 - oportunidades por funil/etapa, status, responsável, empresa, contato, origem, criação, ganho e previsão;
-- passagens por oportunidade, funil, etapa e data;
+- passagens por oportunidade, funil, etapa, responsável, origem e data;
 - tarefas por responsável, status, vencimento e oportunidade;
 - atividades por oportunidade/empresa/contato e data decrescente;
 - encerramentos vigentes por resultado e data;
@@ -395,6 +400,7 @@ Restrições de interface também serão repetidas nas operações transacionais
 11. Índices de apoio para relacionamentos, RLS e consultas operacionais.
 12. Gatilhos de auditoria para empresas, contatos, vínculos e notas.
 13. Correções de tipos nas funções transacionais e otimização das políticas RLS validada pelos Advisors do Supabase.
+14. Valor manual de oportunidades e conclusão do fluxo principal de tarefas, incluindo validação e edição segura de vínculos.
 
 As funções com privilégios elevados ficam no schema `private`, que não é exposto pela Data API. O schema `public` contém somente wrappers `SECURITY INVOKER` explicitamente liberados para a aplicação. Todas as funções públicas revalidam a identidade, o perfil ativo, o cargo e o estado atual por meio da implementação privada.
 
